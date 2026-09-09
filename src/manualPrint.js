@@ -28,7 +28,7 @@ function desenharCabecalhoRodape(pdf,pagina,total,logoData){
   pdf.setFont("helvetica","normal");
   pdf.setFontSize(7.5);
   pdf.setTextColor(95,110,104);
-  pdf.text("© 2026 Jorge Lima Cardoso · CEDUP Hermann Hering",A4.m,A4.h-A4.m-3);
+  pdf.text("© 2026 JLC · CEDUP Hermann Hering",A4.m,A4.h-A4.m-3);
   pdf.text(`Página ${pagina} de ${total}`,A4.w-A4.m,A4.h-A4.m-3,{align:"right"});
 }
 
@@ -70,7 +70,6 @@ async function gerarManualPdf(){
   logoCanvas.getContext("2d").drawImage(logo,0,0);
   const logoData=logoCanvas.toDataURL("image/png");
 
-  // Capa produzida diretamente no PDF - sem dependência da caixa de impressão do navegador.
   pdf.setFillColor(246,250,248);pdf.rect(0,0,A4.w,A4.h,"F");
   pdf.setFillColor(224,240,233);pdf.circle(184,270,54,"F");
   pdf.addImage(logoData,"PNG",20,22,48,25);
@@ -84,7 +83,6 @@ async function gerarManualPdf(){
   pdf.setFontSize(9);pdf.text("Documento de apoio pedagógico",20,272);
   pdf.setFont("helvetica","bold");pdf.text("Blumenau/SC · 2026",190,272,{align:"right"});
 
-  // Página de apresentação e sumário.
   pdf.addPage();
   const intro=document.createElement("div");
   intro.className="manual-pdf-sheet manual-pdf-intro";
@@ -104,14 +102,12 @@ async function gerarManualPdf(){
     clone.removeAttribute("id");
     clone.classList.add("manual-pdf-sheet","manual-pdf-section");
     const host=criarFolhaOculta(clone);
-    // Garante que imagens estejam carregadas antes da captura.
     await Promise.all([...clone.querySelectorAll("img")].map(img=>img.complete?Promise.resolve():new Promise(r=>{img.onload=r;img.onerror=r;})));
     const canvas=await capturarElemento(clone);
     adicionarCanvas(pdf,canvas);
     host.remove();
   }
 
-  // Página final com aviso de uso, se houver.
   const aviso=manual.querySelector(":scope > .notice");
   if(aviso){
     const ultima=pdf.getNumberOfPages();
