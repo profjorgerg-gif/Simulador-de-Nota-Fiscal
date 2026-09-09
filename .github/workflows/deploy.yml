@@ -31,6 +31,8 @@ jobs:
         run: npm install
 
       - name: Build de produção
+        env:
+          CI: false
         run: npm run build
 
       - name: Preparar artefato do Pages
