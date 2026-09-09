@@ -118,7 +118,6 @@ function BlocoEntidade({ titulo, value, onChange }) {
 
 function Danfe({ nfe, cabecalho }) {
   if (!nfe) return null;
-  const regime = REGIMES[nfe.regimeId] || REGIMES["2026"];
   return <div className="danfe">
     <div className="watermark">SIMULAÇÃO — SEM VALOR FISCAL</div>
     {cabecalho && <img className="cabecalho-img" src={cabecalho} alt="Cabeçalho institucional" />}
