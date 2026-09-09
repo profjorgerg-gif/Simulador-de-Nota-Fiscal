@@ -1,3 +1,6 @@
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+
 function textoLimpo(el){return (el?.textContent||'').replace(/\s+/g,' ').trim();}
 
 function localizarBotaoOriginal(rotulo){
@@ -10,7 +13,15 @@ function navegar(rotulo){
   if(alvo) alvo.click();
 }
 
+function removerMenus(){
+  document.querySelector('.floating-nav-shell')?.remove();
+  document.querySelector('.desktop-header-nav')?.remove();
+  document.body.classList.remove('floating-menu-open');
+}
+
 function instalarMenu(){
+  if(!auth.currentUser){removerMenus();return;}
+
   const sidenav=document.querySelector('.sidenav');
   const appbar=document.querySelector('.appbar');
   if(!sidenav||!appbar) return;
@@ -90,11 +101,16 @@ function instalarMenu(){
 
 if(typeof window!=='undefined'){
   const iniciar=()=>{
-    instalarMenu();
-    new MutationObserver(instalarMenu).observe(document.body,{childList:true,subtree:true});
-    window.addEventListener('load',instalarMenu);
-    setTimeout(instalarMenu,300);
-    setTimeout(instalarMenu,1200);
+    onAuthStateChanged(auth,user=>{
+      if(user){
+        instalarMenu();
+        setTimeout(instalarMenu,200);
+        setTimeout(instalarMenu,800);
+      }else{
+        removerMenus();
+      }
+    });
+    new MutationObserver(()=>{if(auth.currentUser) instalarMenu(); else removerMenus();}).observe(document.body,{childList:true,subtree:true});
   };
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',iniciar,{once:true}); else iniciar();
 }
