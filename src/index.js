@@ -13,11 +13,12 @@ import "./landingfix.css";
 import "./floatingmenu.css";
 import "./backupexit.css";
 import "./adminsupport.css";
+import "./audittrail.css";
 import "./manualPrint";
 import "./floatingMenu";
 import "./backupExit";
 import "./adminSupport";
-import "./manualOperacionalAdmin";
+import "./auditTrail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
