@@ -1,0 +1,34 @@
+.manual-print-actions{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:14px 0 18px;padding:14px 16px;border:1px solid #cfe0d8;border-radius:10px;background:#f3f8f6}.manual-print-help{display:flex;flex-direction:column;gap:3px;color:#21483d}.manual-print-help strong{font-size:14px}.manual-print-help span{font-size:12px;line-height:1.4;color:#607169}.manual-print-button{white-space:nowrap}.manual-section h3,.manual-section p,.manual-img{break-inside:avoid-page;page-break-inside:avoid}.manual-section h3{break-after:avoid-page;page-break-after:avoid}.manual-img{max-height:165mm;object-fit:contain}
+
+@media(max-width:700px){.manual-print-actions{flex-direction:column;align-items:stretch}.manual-print-button{width:100%}}
+
+@media print{
+  body.print-manual{background:#fff!important;color:#111!important;overflow:visible!important}
+  body.print-manual .appbar,
+  body.print-manual .sidenav,
+  body.print-manual .legal-footer,
+  body.print-manual .release-banner,
+  body.print-manual .manual-print-actions{display:none!important}
+  body.print-manual .app,
+  body.print-manual .app-body,
+  body.print-manual main,
+  body.print-manual .panel.manual{display:block!important;width:100%!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;background:#fff!important;color:#111!important}
+  body.print-manual .panel.manual>h2,
+  body.print-manual .panel.manual>p,
+  body.print-manual .manual-toc,
+  body.print-manual .manual-section,
+  body.print-manual .manual-section h3,
+  body.print-manual .manual-section p,
+  body.print-manual .manual-img,
+  body.print-manual .panel.manual>.notice{display:block!important}
+  body.print-manual .panel.manual>h2{font-size:22pt!important;margin:0 0 4mm!important;color:#17473b!important}
+  body.print-manual .panel.manual>p{font-size:10.5pt!important;line-height:1.45!important;margin:0 0 5mm!important;color:#333!important}
+  body.print-manual .manual-toc{padding:4mm!important;margin:0 0 6mm!important;background:#f5f5f5!important;border:1px solid #bbb!important}
+  body.print-manual .manual-toc a{font-size:9.5pt!important;color:#17473b!important}
+  body.print-manual .manual-section{margin:0!important;padding:0!important;border:0!important;break-before:page;page-break-before:always}
+  body.print-manual .manual-section:first-of-type{break-before:auto;page-break-before:auto}
+  body.print-manual .manual-section h3{font-size:14pt!important;margin:0 0 3mm!important;color:#17473b!important}
+  body.print-manual .manual-section p{font-size:10.5pt!important;line-height:1.45!important;margin:0 0 4mm!important;color:#222!important;orphans:3;widows:3}
+  body.print-manual .manual-img{display:block!important;width:100%!important;max-width:100%!important;max-height:165mm!important;height:auto!important;object-fit:contain!important;margin:3mm auto 0!important;border:1px solid #aaa!important;border-radius:0!important;box-shadow:none!important;break-inside:avoid!important;page-break-inside:avoid!important}
+  body.print-manual .panel.manual>.notice{font-size:10pt!important;margin-top:5mm!important;break-inside:avoid!important;page-break-inside:avoid!important}
+}
