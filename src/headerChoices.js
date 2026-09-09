@@ -113,11 +113,11 @@ function renderManager(){
   const panels=[...document.querySelectorAll(".panel")];
   const panel=panels.find(p=>p.querySelector("h2")?.textContent?.toLowerCase().includes("cabeçalho institucional"));
   if(!panel)return;
-  let manager=panel.querySelector(".header-choice-manager");
-  if(manager)manager.remove();
+  const existing=panel.querySelector(".header-choice-manager");
+  if(existing)return;
   [...panel.children].forEach(el=>{if(!el.matches("h2"))el.classList.add("header-choice-original-hidden");});
 
-  manager=document.createElement("div");
+  const manager=document.createElement("div");
   manager.className="header-choice-manager";
   manager.innerHTML=`<p class="header-choice-intro">Escolha o cabeçalho que será utilizado nas NF-e simuladas e nos respectivos PDFs. A preferência é individual para cada professor.</p><div class="header-choice-grid"></div><div class="header-choice-status" role="status"></div><div class="header-choice-actions"><button type="button" class="primary header-choice-save">Salvar opção</button></div>`;
   const grid=manager.querySelector(".header-choice-grid");
