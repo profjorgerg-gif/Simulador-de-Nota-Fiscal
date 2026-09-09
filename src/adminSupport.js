@@ -8,7 +8,7 @@ const MANUAL_OPERACIONAL_ID='__manual_operacional__';
 
 function perfil(){return localStorage.getItem('sfd_perfil_acesso')||'professor';}
 function ehAdmin(){return perfil()===PERFIL_ADMIN && localStorage.getItem('sfd_admin_autorizado')==='1';}
-function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));}
 function agora(){return new Date().toLocaleString('pt-BR');}
 
 function baixarTexto(nome,texto,tipo='application/json'){
@@ -97,7 +97,7 @@ async function abrirSuporte(){
   const el=paginaBase('Suporte','Chamados sobre o sistema, abertos por professores e administradores.',`<div class="support-tabs"><button class="active">Chamados do Sistema</button><button>Suporte Pedagógico</button></div><div class="support-toolbar"><div class="support-filters"><button data-f="Todos" class="active">Todos</button><button data-f="Aberto">Abertos</button><button data-f="Em análise">Em análise</button><button data-f="Encaminhado">Encaminhados</button><button data-f="Encerrado">Encerrados</button></div><div><button class="support-print">🖨 Imprimir / Salvar PDF</button><button class="support-new">＋ Novo chamado</button></div></div><div class="support-list"></div>`);
   let filtro='Todos';
   const render=()=>{const list=el.querySelector('.support-list');const dados=chamados.filter(c=>filtro==='Todos'||c.status===filtro);list.innerHTML=dados.length?dados.map(c=>`<article class="ticket" data-id="${esc(c.id)}"><div><span class="ticket-status s-${esc((c.status||'').replace(/\s/g,'-').toLowerCase())}">${esc(c.status||'Aberto')}</span><h3>${esc(c.titulo||'Sem título')}</h3><p>${esc(c.descricao||'')}</p><small>${esc(c.categoria||'Sistema')} · ${esc(c.autor||'')} · ${esc(new Date(c.criadoEm||Date.now()).toLocaleString('pt-BR'))}</small></div>${admin?`<div class="ticket-actions"><select><option>Aberto</option><option>Em análise</option><option>Encaminhado</option><option>Encerrado</option></select><button class="ticket-delete">Excluir</button></div>`:''}</article>`).join(''):'<div class="support-empty">Nenhum chamado encontrado.</div>';
-    if(admin)list.querySelectorAll('.ticket').forEach(card=>{const id=card.dataset.id;const c=chamados.find(x=>x.id===id);const sel=card.querySelector('select');sel.value=c.status||'Aberto';sel.onchange=async()=>{c.status=sel.value;await salvarChamado(c);render();};card.querySelector('.ticket-delete').onclick=async()=>{if(confirm('Excluir este chamado?')){await excluirChamado(id);const i=chamados.findIndex(x=>x.id===id);if(i>=0)chamados.splice(i,1);render();}};});
+    if(admin)list.querySelectorAll('.ticket').forEach(card=>{const id=card.dataset.id;const c=chamados.find(x=>x.id===id);const sel=card.querySelector('select');sel.value=c.status||'Aberto';sel.onchange=async()=>{c.status=sel.value;await salvarChamado(c);render();};card.querySelector('.ticket-delete').onclick=async()=>{if(window.confirm('Excluir este chamado?')){await excluirChamado(id);const i=chamados.findIndex(x=>x.id===id);if(i>=0)chamados.splice(i,1);render();}};});
   };
   render();
   el.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{filtro=b.dataset.f;el.querySelectorAll('[data-f]').forEach(x=>x.classList.toggle('active',x===b));render();});
