@@ -36,6 +36,17 @@ function instalarMenuFlutuante(){
     </aside>`;
   document.body.appendChild(shell);
 
+  const desktop=document.createElement('nav');
+  desktop.className='desktop-header-nav';
+  desktop.setAttribute('aria-label','Menu principal do sistema');
+  desktop.innerHTML=`
+    <button type="button" data-target="NF-e"><span>▣</span> Emitir NF-e</button>
+    <button type="button" data-target="Histórico"><span>▤</span> Histórico</button>
+    <button type="button" data-target="Cabeçalho"><span>▧</span> Cabeçalho</button>
+    <button type="button" data-target="Manual"><span>▥</span> Manual</button>`;
+  const user=appbar.querySelector('.user');
+  if(user) appbar.insertBefore(desktop,user); else appbar.appendChild(desktop);
+
   const trigger=shell.querySelector('.floating-menu-trigger');
   const drawer=shell.querySelector('.floating-menu-drawer');
   const overlay=shell.querySelector('.floating-menu-overlay');
@@ -44,11 +55,13 @@ function instalarMenuFlutuante(){
   const fechar=()=>{shell.classList.remove('open');trigger.setAttribute('aria-expanded','false');drawer.setAttribute('aria-hidden','true');overlay.setAttribute('aria-hidden','true');document.body.classList.remove('floating-menu-open');};
   trigger.addEventListener('click',abrir); close.addEventListener('click',fechar); overlay.addEventListener('click',fechar);
 
-  shell.querySelectorAll('[data-target]').forEach(btn=>btn.addEventListener('click',()=>{
+  const acionar=btn=>{
     const alvo=localizarBotaoOriginal(btn.dataset.target);
     if(alvo) alvo.click();
-    fechar();
-  }));
+  };
+  shell.querySelectorAll('[data-target]').forEach(btn=>btn.addEventListener('click',()=>{acionar(btn);fechar();}));
+  desktop.querySelectorAll('[data-target]').forEach(btn=>btn.addEventListener('click',()=>acionar(btn)));
+
   shell.querySelector('.floating-menu-exit').addEventListener('click',()=>{
     const candidatos=[...appbar.querySelectorAll('button')];
     const sair=candidatos.find(b=>textoLimpo(b).toLowerCase()==='sair');
@@ -57,7 +70,7 @@ function instalarMenuFlutuante(){
   });
 
   const sincronizar=()=>{
-    shell.querySelectorAll('[data-target]').forEach(btn=>{
+    [...shell.querySelectorAll('[data-target]'),...desktop.querySelectorAll('[data-target]')].forEach(btn=>{
       const alvo=localizarBotaoOriginal(btn.dataset.target);
       btn.classList.toggle('active',!!alvo?.classList.contains('active'));
     });
