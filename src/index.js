@@ -17,6 +17,7 @@ import "./manualPrint";
 import "./floatingMenu";
 import "./backupExit";
 import "./adminSupport";
+import "./manualOperacionalAdmin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
