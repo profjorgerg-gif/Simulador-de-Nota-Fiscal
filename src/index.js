@@ -11,8 +11,10 @@ import "./legalfooter.css";
 import "./manualprint.css";
 import "./landingfix.css";
 import "./floatingmenu.css";
+import "./backupexit.css";
 import "./manualPrint";
 import "./floatingMenu";
+import "./backupExit";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
