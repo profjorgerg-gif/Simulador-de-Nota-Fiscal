@@ -14,11 +14,13 @@ import "./floatingmenu.css";
 import "./backupexit.css";
 import "./adminsupport.css";
 import "./audittrail.css";
+import "./accessapproval.css";
 import "./manualPrint";
 import "./floatingMenu";
 import "./backupExit";
 import "./adminSupport";
 import "./auditTrail";
+import "./accessApproval";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
