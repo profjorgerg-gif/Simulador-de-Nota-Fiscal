@@ -1,0 +1,9 @@
+{
+  "short_name": "Simulador Fiscal",
+  "name": "Simulador Fiscal Didático — CEDUP Hermann Hering",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1D5C4B",
+  "background_color": "#EEE8D8"
+}
