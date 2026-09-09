@@ -12,9 +12,11 @@ import "./manualprint.css";
 import "./landingfix.css";
 import "./floatingmenu.css";
 import "./backupexit.css";
+import "./adminsupport.css";
 import "./manualPrint";
 import "./floatingMenu";
 import "./backupExit";
+import "./adminSupport";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
