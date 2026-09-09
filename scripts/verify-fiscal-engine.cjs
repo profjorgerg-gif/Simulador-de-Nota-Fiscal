@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const appPath = path.join(__dirname, '..', 'src', 'AppV4.jsx');
+const appPath = path.join(__dirname, '..', 'src', 'AppV5.jsx');
+const indexPath = path.join(__dirname, '..', 'src', 'index.js');
 const src = fs.readFileSync(appPath, 'utf8');
+const indexSrc = fs.readFileSync(indexPath, 'utf8');
 
 function assert(cond, msg) {
   if (!cond) {
@@ -42,15 +44,23 @@ function totais({produtos, descontoPct=0, frete=0, seguro=0, outras=0, origem='S
   };
 }
 
+// Confirma que a aplicação publicada aponta para o motor vigente.
+assert(indexSrc.includes('import AppV5 from "./AppV5"'), 'index.js não está utilizando o AppV5.');
+assert(src.includes('const MOTOR="2026.2"'), 'versão 2026.2 não está ativa.');
+
 // Guardas de implementação: o build deve falhar se regras centrais forem removidas sem revisão.
-assert(src.includes('MOTOR_FISCAL_VERSION="2026.2"'), 'versão 2026.2 não está ativa.');
 ['1102','2102','5102','6102'].forEach(c => assert(src.includes(`codigo:"${c}"`), `CFOP ${c} não encontrado.`));
 ['1403','2403','5403','6403'].forEach(c => assert(!src.includes(`codigo:"${c}"`), `CFOP ST ${c} não deve estar liberado no motor 2026.2.`));
 assert(src.includes('cst:"00"'), 'CST 00 obrigatório no escopo atual não encontrado.');
-assert(src.includes('cbs:0.90') || src.includes('cbs:0.9'), 'CBS 0,90% não encontrada.');
-assert(src.includes('ibs:0.10') || src.includes('ibs:0.1'), 'IBS 0,10% não encontrado.');
-assert(src.includes('Peso líquido não pode ser maior que o peso bruto.'), 'validação de pesos foi removida.');
+assert(src.includes('cbs:.9') || src.includes('cbs:0.9') || src.includes('cbs:0.90'), 'CBS 0,90% não encontrada.');
+assert(src.includes('ibs:.1') || src.includes('ibs:0.1') || src.includes('ibs:0.10'), 'IBS 0,10% não encontrado.');
+assert(src.includes('Peso líquido não pode superar o peso bruto.') || src.includes('Peso líquido não pode ser maior que o peso bruto.'), 'validação de pesos foi removida.');
 assert(src.includes('validacaoFiscal'), 'metadados de validação fiscal não encontrados.');
+assert(src.includes('status:"APROVADO"'), 'status de aprovação fiscal não encontrado.');
+assert(src.includes('motorFiscalVersion:MOTOR'), 'versão do motor não está sendo gravada no documento.');
+assert(src.includes('soDigitos(i.ncm).length!==8'), 'validação de NCM com 8 dígitos não encontrada.');
+assert(src.includes('validarCnpj'), 'validação de CNPJ não encontrada.');
+assert(src.includes('validarIeSC') && src.includes('validarIePR'), 'validação de IE SC/PR não encontrada.');
 
 // Vetores numéricos de regressão.
 assert(icms('SC','SC') === 17, 'ICMS interno SC deve ser 17%.');
