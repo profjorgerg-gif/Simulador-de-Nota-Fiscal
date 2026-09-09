@@ -4,6 +4,7 @@ import AppV3 from "./AppV3";
 import ReleaseBanner from "./ReleaseBanner";
 import "./index.css";
 import "./print.css";
+import "./pdfview.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
