@@ -1,0 +1,18 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Documentos fiscais simulados.
+    // O simulador exige login Google, portanto somente usuários autenticados
+    // podem ler e gravar dados didáticos.
+    match /documentos/{documentoId} {
+      allow read, create, update, delete: if request.auth != null;
+    }
+
+    // Compatibilidade com o cabeçalho institucional da versão anterior.
+    match /config/{configId} {
+      allow read, create, update, delete: if request.auth != null;
+    }
+  }
+}
