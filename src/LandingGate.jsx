@@ -28,6 +28,6 @@ export default function LandingGate({ children }) {
         <blockquote>“Formação técnica de qualidade para formar grandes profissionais.”</blockquote></div>
     </section>
     <section className="landing-access"><div className="login-card"><div className="login-icon">🔒</div><h2>Entrar no sistema</h2><p>Acesse com sua conta Google para utilizar o Simulador Fiscal Didático.</p><button className="google-button" onClick={entrar} disabled={entrando}><span>G</span>{entrando ? "Entrando..." : "Continuar com o Google"}</button><div className="professor-note"><strong>Acesso exclusivo do professor</strong><span>Plataforma destinada ao desenvolvimento das atividades didáticas.</span></div>{erro && <div className="landing-error">{erro}</div>}<small>Autenticado via Firebase Authentication — somente conta Google.</small></div></section>
-    <footer className="landing-footer"><div><strong>© 2026 Jorge Lima Cardoso.</strong> Todos os direitos reservados.</div><div>Plataforma didática desenvolvida para o CEDUP Hermann Hering — Curso Técnico em Administração e Contabilidade.</div><div className="landing-place">Blumenau/SC &nbsp; | &nbsp; 2026</div></footer>
+    <footer className="landing-footer"><div><strong>© 2026 JLC.</strong> Todos os direitos reservados.</div><div>Plataforma didática desenvolvida para o CEDUP Hermann Hering — Curso Técnico em Administração e Contabilidade.</div><div className="landing-place">Blumenau/SC &nbsp; | &nbsp; 2026</div></footer>
   </main>;
 }
