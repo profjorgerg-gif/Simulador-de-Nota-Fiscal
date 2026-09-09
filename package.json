@@ -2,7 +2,7 @@
   "name": "simulador-fiscal-cedup",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://TODO_USUARIO.github.io/TODO_REPOSITORIO",
+  "homepage": "https://profjorgerg-gif.github.io/Simulador-de-Nota-Fiscal",
   "dependencies": {
     "firebase": "^10.12.0",
     "react": "^18.3.1",
