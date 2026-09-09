@@ -10,7 +10,9 @@ import "./pdfview.css";
 import "./legalfooter.css";
 import "./manualprint.css";
 import "./landingfix.css";
+import "./floatingmenu.css";
 import "./manualPrint";
+import "./floatingMenu";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
