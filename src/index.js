@@ -8,6 +8,9 @@ import "./index.css";
 import "./print.css";
 import "./pdfview.css";
 import "./legalfooter.css";
+import "./manualprint.css";
+import "./landingfix.css";
+import "./manualPrint";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
