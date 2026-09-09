@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import AppV3 from "./AppV3";
+import AppV4 from "./AppV4";
 import ReleaseBanner from "./ReleaseBanner";
 import LegalFooter from "./LegalFooter";
 import LandingGate from "./LandingGate";
@@ -27,7 +27,7 @@ root.render(
   <React.StrictMode>
     <LandingGate>
       <ReleaseBanner />
-      <AppV3 />
+      <AppV4 />
       <LegalFooter />
     </LandingGate>
   </React.StrictMode>
