@@ -24,6 +24,7 @@ import "./auditTrail";
 import "./accessApproval";
 import "./headerChoices";
 import "./manualCurrent";
+import "./publicLabels";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
